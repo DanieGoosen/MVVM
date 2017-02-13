@@ -20,6 +20,11 @@ namespace MVVM.Training.Models {
 
         public string Id { get; } = Guid.NewGuid().ToString();
 
+        internal void SetTeam(string name) {
+            this.Team = name;
+            this.BelongsToTeam = name != "";
+        }
+
         private string name = "";
         /// <summary>
         /// Gets or sets the name of the member
@@ -79,6 +84,8 @@ namespace MVVM.Training.Models {
                 }
             }
         }
+
+        public string Team { get; set; }
 
         public override string ToString() {
             return string.Format("{0}, {1} ({2})", Lastname, Name, Gender);

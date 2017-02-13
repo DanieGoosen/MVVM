@@ -18,6 +18,8 @@ namespace MVVM.Training.Models {
         public void AddMember(MemberModel member) {
             if (!this.Members.Contains(member)) {
                 this.Members.Add(member);
+                member.SetTeam(this.Name);
+
                 this.SetPropertyChanged("MemberCount");
             }
         }

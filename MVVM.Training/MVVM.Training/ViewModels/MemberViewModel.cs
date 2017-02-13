@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MVVM.Training.ViewModels {
     public class MemberViewModel : ModelBase {
         public MemberViewModel() {
-            this.AvailableTeams = EventManager.OnGetTeams();
+            this.AvailableTeams = Tools.EventManager.OnGetTeams();
 
-            var members = EventManager.OnGetMembers();
+            var members = Tools.EventManager.OnGetMembers();
             if (members != null) {
                 this.Members = members;
             }
@@ -44,13 +45,27 @@ namespace MVVM.Training.ViewModels {
         }
 
         public void AssignToteam(object obj) {
+            if (this.SelectedMember.BelongsToTeam) {
+                var team = this.AvailableTeams.FirstOrDefault(t => t.Name == this.SelectedMember.Team);
+                if (team != null) {// team has been found
+                    team.Members.Remove(SelectedMember);
+                    team.SetPropertyChanged("TeamInfo");
+                }
+            }
+
             this.SelectedTeam.AddMember(SelectedMember);
             SetPropertyChanged("AvailableTeams");
             SetPropertyChanged("SelectedTeam");
+            SetPropertyChanged("CanAssignToTeam");
+
+            MessageBox.Show(string.Format("Assigned to team: {0}", SelectedTeam.TeamInfo));
         }
 
         public bool CanAssignToTeam {
-            get { return (SelectedMember != null && SelectedTeam != null); }
+            get {
+                return (SelectedMember != null && SelectedTeam != null &&
+                  (!SelectedTeam.Members.Contains(SelectedMember)));
+            }
         }
 
 
@@ -104,7 +119,5 @@ namespace MVVM.Training.ViewModels {
                 }
             }
         }
-
-
     }
 }
