@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="MVVM.Training.Views.OrganizationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM.Training.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border BorderBrush="DarkGray" CornerRadius="3" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="4*" MinWidth="200"/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Organizations, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrganization}"
+                     HorizontalContentAlignment="Stretch" Grid.Column="0" Margin="3">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkGray" BorderThickness="0,0,0,2">
+                            <Grid>
+                                <Label Foreground="LightGray" HorizontalAlignment="Center" Opacity="0.3" FontSize="20" Content="{Binding Name}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <GridSplitter HorizontalAlignment="Stretch" Grid.Column="1"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <DockPanel>
+                        <Label Width="60"
+                            Content="Name"/>
+                        <TextBox  Text="{Binding SelectedOrganization.Name}" Margin="3"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Width="60"
+                            Content="Teams"/>
+                        <TextBox  Text="{Binding SelectedOrganization.TeamCount, Mode=OneWayToSource}" Margin="3"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Width="60"
+                            Content="Members"/>
+                        <TextBox  Text="{Binding SelectedOrganization.MemberCount, Mode=OneWayToSource}" Margin="3"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Button Content="Add New"  Command="{Binding AddOrganizationCommand}" Margin="5" Padding="5,0,5,0"/>
+                    <Button Content="Remove" IsEnabled="{Binding CanRemove}" Command="{Binding RemoveOrganizationCommand}" Margin="5" Padding="5,0,5,0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
