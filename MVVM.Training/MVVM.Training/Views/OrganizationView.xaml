@@ -19,7 +19,7 @@
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" BorderThickness="0,0,0,2">
                             <Grid>
-                                <Label Foreground="LightGray" HorizontalAlignment="Center" Opacity="0.3" FontSize="20" Content="{Binding Name}"/>
+                                <Label Foreground="LightGray" HorizontalAlignment="Center" FontSize="20" Content="{Binding Name}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -40,12 +40,12 @@
                     <DockPanel>
                         <Label Width="60"
                             Content="Teams"/>
-                        <TextBox  Text="{Binding SelectedOrganization.TeamCount, Mode=OneWayToSource}" Margin="3"/>
+                        <TextBox  Text="{Binding SelectedOrganization.TeamCount, Mode=OneWay}" Margin="3"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Width="60"
                             Content="Members"/>
-                        <TextBox  Text="{Binding SelectedOrganization.MemberCount, Mode=OneWayToSource}" Margin="3"/>
+                        <TextBox  Text="{Binding SelectedOrganization.MemberCount, Mode=OneWay}" Margin="3"/>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">

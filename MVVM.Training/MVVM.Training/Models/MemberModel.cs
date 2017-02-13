@@ -22,7 +22,7 @@ namespace MVVM.Training.Models {
 
         internal void SetTeam(string name) {
             this.Team = name;
-            this.BelongsToTeam = name != "";
+            this.BelongsToTeam = name != null || name != "";
         }
 
         private string name = "";

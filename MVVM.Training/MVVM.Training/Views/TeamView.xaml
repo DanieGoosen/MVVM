@@ -19,7 +19,7 @@
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" BorderThickness="0,0,0,2">
                             <Grid>
-                                <Label Foreground="LightGray" HorizontalAlignment="Center" Opacity="0.3" FontSize="20" Content="{Binding Name}"/>
+                                <Label Foreground="LightGray" HorizontalAlignment="Center" FontSize="20" Content="{Binding Name}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -42,6 +42,16 @@
                             Content="Members"/>
                         <TextBox  Text="{Binding SelectedTeam.MemberCount, Mode=OneWay}" IsReadOnly="True" Margin="3"/>
                     </DockPanel>
+                    <ItemsControl ItemsSource="{Binding SelectedTeam.Members, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="•"/>
+                                    <Label Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
                     <Button Content="Add New"  Command="{Binding AddTeamCommand}" Margin="5" Padding="5,0,5,0"/>

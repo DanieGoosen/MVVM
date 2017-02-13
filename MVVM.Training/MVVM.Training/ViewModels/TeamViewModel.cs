@@ -12,6 +12,7 @@ namespace MVVM.Training.ViewModels {
             var teams = EventManager.OnGetTeams();
             if (teams != null) {
                 this.Teams = teams;
+                this.SelectedTeam = Teams.FirstOrDefault();
             }
         }
 

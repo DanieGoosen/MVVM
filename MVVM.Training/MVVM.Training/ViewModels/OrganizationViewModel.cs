@@ -11,6 +11,7 @@ namespace MVVM.Training.ViewModels {
         #region Constructors
         public OrganizationViewModel() {
             addTestModels();
+            this.SelectedOrganization = Organizations.FirstOrDefault();
         }
 
         private void addTestModels() {

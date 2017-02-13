@@ -19,7 +19,7 @@
                     <DataTemplate>
                         <Border BorderBrush="DarkGray" BorderThickness="0,0,0,2">
                             <Grid>
-                                <Label Foreground="LightGray" HorizontalAlignment="Center" Opacity="0.3" FontSize="20" Content="{Binding Name}"/>
+                                <Label Foreground="LightGray" HorizontalAlignment="Center" FontSize="20" Content="{Binding Name}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -60,9 +60,15 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </DockPanel>
-                    <DockPanel>
-                        <Button Content="Assign to Team" Command="{Binding AssignToteamCommand}" IsEnabled="{Binding CanAssignToTeam}"/>
-                    </DockPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Unassign" Command="{Binding UnassignFromTeamCommand }" IsEnabled="{Binding CanUnassignToTeam}" />
+                        <Button Grid.Column="2" Content="Assign" Command="{Binding AssignToteamCommand}" IsEnabled="{Binding CanAssignToTeam}"/>
+                    </Grid>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
                     <Button Content="Add New"  Command="{Binding AddMemberCommand}" Margin="5" Padding="5,0,5,0"/>
